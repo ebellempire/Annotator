@@ -67,12 +67,30 @@ class AnnotatorPlugin extends Omeka_Plugin_AbstractPlugin
 
 	}
 }
-
+function startsWith($haystack, $needle) {
+    return $needle === "" || strrpos($haystack, $needle, -strlen($haystack)) !== FALSE;
+}
 function ajs_annotations_scripts($option=null)
 {
-	$html  = '<script async defer src="//hypothes.is/embed.js"></script>';
-	if( ($id=get_option('ajs_showHighlights')) && ($option==1) ){
-		$html.='<script>window.hypothesisConfig=function(){return{showHighlights:true};</script>';
+	$url=parse_url(current_url());
+	$url=$url['path'];
+	$is_item_url='/items/show/';
+	$is_collection_url='/collections/show/';
+	$annotatable=( (startsWith($url, $is_item_url) && get_option('ajs_items') ) || (startsWith($url, $is_collection_url) && get_option('ajs_collections') ) );
+	$show_highlights=get_option('ajs_showHighlights');
+	$show_mobile=get_option('ajs_displayOnMobile');
+	$breakpoint='768';
+	
+	if($annotatable){
+		$html  = '<script async defer src="//hypothes.is/embed.js"></script>';
+		if($show_highlights){
+			$html.='<script>var breakpoint='.$breakpoint.';if(window.innerWidth>=breakpoint){window.hypothesisConfig=function(){return{showHighlights:true};}</script>';
+		}
+		if(!$show_mobile){
+			//TODO: swap out the boolean option for a user-configurable min breakpoint where 0 equals none
+			$html.='<style type="text/css">@media all and (max-width:'.$breakpoint.'px){
+				div.annotator-frame, div.annotator-outer, div.annotator-notice, div.annotator-adder{display:none !important;}}</style>';
+		}
+		return $html;
 	}
-	return $html;
 }

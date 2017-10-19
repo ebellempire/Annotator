@@ -1,33 +1,3 @@
-<style>
-	.helper{font-size:.85em;}
-</style>
-
-<p><strong>Please Note: </strong>users will only be able to sign into their hypothes.is account to leave annotations if your site is served over secure <a href="https://en.wikipedia.org/wiki/HTTPS" title="HTTPS @ Wikipedia">HTTPS</a>.</p>
-
-<!--
-<h2><?php echo __('Account Settings'); ?></h2>
-
-<fieldset id="account">
-
-	<div class="field">
-	    <div class="two columns alpha">
-	        <label for="ajs_account"><?php echo __('Site Account'); ?></label>
-	    </div>
-
-	    <div class="inputs five columns omega">
-	        <p class="explanation"><?php echo __("Enter the site acct id."); ?></p>
-
-	        <div class="input-block">
-	            <input type="text" class="textinput" name="ajs_account" value="<?php echo get_option('ajs_account'); ?>">
-	            <p class="helper"></p>
-	        </div>
-	    </div>
-	</div>
-
-</fieldset>
--->
-
-
 <h2><?php echo __('Display Settings'); ?></h2>
 
 <fieldset id="display">
@@ -92,18 +62,3 @@
 	        <p class="explanation"><?php echo __('Display annotations on collection record.'); ?></p>
 	    </div>
 	</div>
-	
-<!--
-	<div class="field">
-	    <div class="two columns alpha">
-	        <label for="ajs_simplePages"><?php echo __('Simple Pages'); ?></label>
-	    </div>
-
-	    <div class="inputs five columns omega">
-	        <?php echo get_view()->formCheckbox('ajs_collections', true,
-	array('checked'=>(boolean)get_option('ajs_simplePages'))); ?>
-
-	        <p class="explanation"><?php echo __('Display annotations on pages (Simple Pages).'); ?></p>
-	    </div>
-	</div>	
--->
